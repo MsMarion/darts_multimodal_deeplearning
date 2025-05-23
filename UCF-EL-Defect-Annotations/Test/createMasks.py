@@ -19,9 +19,6 @@ from pathlib import Path
 from typing import Dict, List, Tuple
 import pandas as pd         # added pandas for dataframe use ing 
 
-
-
-
 # Define defect categories and their colors
 defect_categories = {
     'Contact_FrontGridInterruption': 1,
@@ -39,41 +36,13 @@ defect_categories = {
     'Crack_Isolated': 2
 }
 
-
-"""
-        if shape_attributes['name'] == 'rect':
-            mask = create_mask_from_rectangles([shape_attributes], width, height)
-        else:
-            mask = create_mask_from_polygons([shape_attributes], width, height)
-                
-        # apply defect-specific color
-        colored_mask = create_colored_mask(defect_class, width, height)
-        colored_mask[mask == 255] = colored_mask[mask == 255] * 0.5
-                
-        # combine with existing mask
-        combined_mask = np.maximum(combined_mask, mask)
-            
-        # save binary mask
-        mask_path = os.path.join(masks_dir, f"{path(filename).stem}_mask.png")
-        cv2.imwrite(mask_path, combined_mask)
-            
-        # create and save overlay
-        overlay = image.copy().astype(np.float32) / 255.0
-        overlay[combined_mask == 255] = overlay[combined_mask == 255] * 0.5
-            
-        overlay_path = os.path.join(overlays_dir, f"{path(filename).stem}_overlay.png")
-        cv2.imwrite(overlay_path, overlay * 255.0)
-"""
-
 #updated with one in the model 
 # create custom colormap for image visualizations [Black, Red, Blue, Purple, Orange]
 cmaplist = [(0.001462, 0.000466, 0.013866, 1.0),                                    
             (0.8941176470588236, 0.10196078431372549, 0.10980392156862745, 1.0),    
             (0.21568627450980393, 0.49411764705882355, 0.7215686274509804, 1.0),    
             (0.596078431372549, 0.3058823529411765, 0.6392156862745098, 1.0),       
-            (1.0, 0.4980392156862745, 0.0, 1.0)]                                    
-
-
+            (1.0, 0.4980392156862745, 0.0, 1.0)]                                   
 
 
 def parse_region_attributes(region_str: str) -> dict:
@@ -153,8 +122,7 @@ def create_dataframe(csv_path):
 
 def process_annotations(csv_path: str, images_dir: str, output_dir: str):
     """
-    Process annotations and create masks with colored overlays.
-    
+    Process annotations and create masks with colored overlays.    
     Args:
         csv_path: Path to CSV file containing annotations
         images_dir: Directory containing original images
